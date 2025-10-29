@@ -1,7 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-
+const authRoutes = require('./routes/auth.routes');
+const bookingRoutes = require('./routes/booking.routes');
+const offdayRoutes = require('./routes/offday.routes');
 dotenv.config();
 
 const app = express();
@@ -13,6 +15,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Welcome to Radiant Sports Zone Booking API');
 });
+
+app.use('/auth', authRoutes);
+app.use('/booking', bookingRoutes);
+app.use('/offday', offdayRoutes);
 
 mongoose.connect(MONGO_URI)
     .then(() => {
